@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slug: MyString
+  last_activity: 2023-06-25 17:05:14
+  post_type: MyString
+  comment_count: 1
+  rating: 1
+  is_commentable: false
+  is_visible: false
+  is_draft: false
+  user: one
+
+two:
+  slug: MyString
+  last_activity: 2023-06-25 17:05:14
+  post_type: MyString
+  comment_count: 1
+  rating: 1
+  is_commentable: false
+  is_visible: false
+  is_draft: false
+  user: two
