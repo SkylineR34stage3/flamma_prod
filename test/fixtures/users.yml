@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nickname: MyString
+  email: MyString
+  name: MyString
+  surname: MyString
+  avatar: MyString
+  location: MyString
+  about_me: MyString
+  contact_info: MyString
+  company: MyString
+  position: MyString
+  slug: MyString
+  role: MyString
+  activity_status: false
+  is_rejected: false
+  reject_date: 2023-06-25
+  reject_reason: MyString
+  is_banned: false
+  ban_date: 2023-06-25
+  ban_reason: MyString
+  telegram_id: MyString
+  respect: MyString
+
+two:
+  nickname: MyString
+  email: MyString
+  name: MyString
+  surname: MyString
+  avatar: MyString
+  location: MyString
+  about_me: MyString
+  contact_info: MyString
+  company: MyString
+  position: MyString
+  slug: MyString
+  role: MyString
+  activity_status: false
+  is_rejected: false
+  reject_date: 2023-06-25
+  reject_reason: MyString
+  is_banned: false
+  ban_date: 2023-06-25
+  ban_reason: MyString
+  telegram_id: MyString
+  respect: MyString
