@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :posts
-  resources :users
+  resources :users do
+    member do
+      get :verify
+      get :ban
+      get :decline
+    end
+  end
+  get 'verification', to: 'users#verification', as: 'verification'
+  get 'banned', to: 'users#banned', as: 'banned'
+  get 'rejected', to: 'users#rejected', as: 'rejected'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

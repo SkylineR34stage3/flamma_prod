@@ -1,5 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :check_admin, only: [:verify, :ban, :decline]
+  before_action :check_verification, except: [:new, :create]
+
+  def check_verification
+    if current_user.status == "pending_verification"
+      redirect_to verification_path
+    elsif current_user.status == "banned"
+      redirect_to banned_path
+    elsif current_user.status == "rejected"
+      redirect_to rejected_path
+    end
+  end
 
   # GET /users or /users.json
   def index
@@ -17,6 +30,44 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def verify
+    user = User.find(params[:id])
+    user.verify
+    redirect_to users_path
+  end
+
+  def ban
+    user = User.find(params[:id])
+    user.ban
+    redirect_to users_path
+  end
+
+  def decline
+    user = User.find(params[:id])
+    user.decline
+    redirect_to users_path
+  end
+
+  private
+
+  def check_admin
+    unless current_user.admin?
+      redirect_to root_path, alert: "You are not authorized to perform this action"
+    end
+  end
+
+  def verification
+    # render the page that informs the user they need to wait for verification
+  end
+
+  def banned
+    # render the page that informs the user they are banned
+  end
+
+  def rejected
+    # render the page that informs the user they are rejected
   end
 
   # POST /users or /users.json
