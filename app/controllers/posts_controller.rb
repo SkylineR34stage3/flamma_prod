@@ -27,7 +27,11 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
 
-    @post = Post.new(post_params)
+    # Set additional fields here
+    @post.slug = @post.title.parameterize
+    @post.last_activity = Time.now
+    @post.comment_count = 0
+    @post.rating = 0
 
     respond_to do |format|
       if @post.save
@@ -71,7 +75,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:slug, :last_activity, :post_type, :comment_count, :rating, :is_commentable, :is_visible, :is_draft)
+      params.require(:post).permit(:title, :subtitle, :content, :post_type, :is_commentable, :is_visible, :is_draft)
     end
 
     def check_user_status
