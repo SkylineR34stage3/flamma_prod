@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_user_status, except: [:index, :show]
 
   # GET /posts or /posts.json
   def index
@@ -71,5 +72,11 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:slug, :last_activity, :post_type, :comment_count, :rating, :is_commentable, :is_visible, :is_draft)
+    end
+
+    def check_user_status
+      if user_signed_in? && current_user.pending_verification?
+        redirect_to root_path, alert: "Your account is pending verification. You can only view posts at this time."
+      end
     end
 end
