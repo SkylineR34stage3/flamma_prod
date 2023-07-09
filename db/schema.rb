@@ -54,12 +54,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_02_101809) do
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nickname"
-    t.string "email"
-    t.string "name"
-    t.string "surname"
-    t.string "location"
-    t.text "about_me"
-    t.string "contact_info"
+    t.string "email", default: "", null: false
+    t.string "name", limit: 20, default: "", null: false
+    t.string "surname", limit: 20, default: "", null: false
+    t.integer "location"
+    t.text "about_me", null: false
+    t.integer "contact_info"
     t.string "company"
     t.string "position"
     t.string "slug"
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_02_101809) do
     t.integer "status", default: 0
     t.boolean "activity_status", default: false
     t.boolean "is_rejected", default: false
-    t.date "reject_date"
+    t.datetime "reject_date"
     t.string "reject_reason"
     t.boolean "is_banned", default: false
     t.datetime "ban_date"
