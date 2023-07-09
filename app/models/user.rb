@@ -5,8 +5,9 @@ class User < ApplicationRecord
 
   has_many :posts
 
-  validates :nickname, :email, :name, :surname, presence: true
-  validates :email, uniqueness: true
+  validates :nickname, :email, presence: true
+  validates :name, :surname, presence: true, length: {minimum: 2}
+  validates :email, uniqueness: true, format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\z/ }
   validates :slug, uniqueness: true
   validates :role, :status, presence: true
 
