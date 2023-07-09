@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  validates :title, presence: true
+  validates :subtitle, presence: true
+  validates :content, presence: true
   validates :slug, presence: true, uniqueness: true
   validates :last_activity, presence: true
   validates :post_type, presence: true

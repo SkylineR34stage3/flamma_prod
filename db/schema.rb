@@ -38,6 +38,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_02_101809) do
   end
 
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "subtitle", null: false
+    t.text "content", null: false
     t.string "slug", null: false
     t.datetime "last_activity", null: false
     t.string "post_type", null: false

@@ -1,57 +1,52 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<%= form_with(model: @post, local: true) do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :slug, style: "display: block" %>
-    <%= form.text_field :slug %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :last_activity, style: "display: block" %>
-    <%= form.datetime_field :last_activity %>
+  <div class="field">
+    <%= form.label :subtitle %>
+    <%= form.text_field :subtitle %>
   </div>
 
-  <div>
-    <%= form.label :post_type, style: "display: block" %>
-    <%= form.text_field :post_type %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
   </div>
 
-  <div>
-    <%= form.label :comment_count, style: "display: block" %>
-    <%= form.number_field :comment_count %>
+  <div class="field">
+    <%= form.label :post_type %>
+    <%= form.select :post_type, ['option1', 'option2', 'option3'] %>  <!-- Replace with your options -->
   </div>
 
-  <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.number_field :rating %>
-  </div>
-
-  <div>
-    <%= form.label :is_commentable, style: "display: block" %>
+  <div class="field">
+    <%= form.label :is_commentable %>
     <%= form.check_box :is_commentable %>
   </div>
 
-  <div>
-    <%= form.label :is_visible, style: "display: block" %>
+  <div class="field">
+    <%= form.label :is_visible %>
     <%= form.check_box :is_visible %>
   </div>
 
-  <div>
-    <%= form.label :is_draft, style: "display: block" %>
+  <div class="field">
+    <%= form.label :is_draft %>
     <%= form.check_box :is_draft %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
