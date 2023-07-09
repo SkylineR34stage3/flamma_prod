@@ -76,3 +76,7 @@ group :test do
 end
 
 gem 'friendly_id', '~> 5.4.0'
+gem 'devise'
+gem 'cancancan'
+gem 'activeadmin'
+gem 'sassc-rails'

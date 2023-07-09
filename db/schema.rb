@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_25_150514) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_02_101809) do
+  create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "admin_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "slug", null: false
     t.datetime "last_activity", null: false
@@ -31,25 +57,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_25_150514) do
     t.string "email"
     t.string "name"
     t.string "surname"
-    t.string "avatar"
     t.string "location"
-    t.string "about_me"
+    t.text "about_me"
     t.string "contact_info"
     t.string "company"
     t.string "position"
     t.string "slug"
-    t.string "role"
-    t.boolean "activity_status"
-    t.boolean "is_rejected"
+    t.integer "role", default: 0
+    t.integer "status", default: 0
+    t.boolean "activity_status", default: false
+    t.boolean "is_rejected", default: false
     t.date "reject_date"
     t.string "reject_reason"
-    t.boolean "is_banned"
-    t.date "ban_date"
+    t.boolean "is_banned", default: false
+    t.datetime "ban_date"
     t.string "ban_reason"
-    t.string "telegram_id"
-    t.string "respect"
+    t.integer "respect", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role"], name: "index_users_on_role"
+    t.index ["slug"], name: "index_users_on_slug", unique: true
+    t.index ["status"], name: "index_users_on_status"
   end
 
   add_foreign_key "posts", "users"
