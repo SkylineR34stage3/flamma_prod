@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :name, null: false, default: "", limit: 20
       t.string :surname, null: false, default: "", limit: 20
       t.integer :location
-      t.text :about_me, null: false, default: ""
+      t.text :about_me
       t.integer :contact_info
       t.string :company
       t.string :position

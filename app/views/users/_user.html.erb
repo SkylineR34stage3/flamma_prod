@@ -1,4 +1,5 @@
 <div id="<%= dom_id user %>">
+  <%= image_tag(@user.image) if @user.image.attached? %>
   <p>
     <strong>Nickname:</strong>
     <%= user.nickname %>

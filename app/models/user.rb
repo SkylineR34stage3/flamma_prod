@@ -4,6 +4,7 @@ class User < ApplicationRecord
   before_validation :set_slug, on: :create
 
   has_many :posts
+  has_one_attached :image
 
   validates :nickname, :email, presence: true
   validates :name, :surname, presence: true, length: {minimum: 2}
