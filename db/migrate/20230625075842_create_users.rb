@@ -2,11 +2,11 @@ class CreateUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :users do |t|
       t.string :nickname
-      t.string :email, null: false, default: ""
-      t.string :name, null: false, default: ""
-      t.string :surname, null: false, default: ""
+      t.string :email, null: false, default: "", format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\z/ }
+      t.string :name, null: false, default: "", limit: 20
+      t.string :surname, null: false, default: "", limit: 20
       t.string :location
-      t.text :about_me, null: false, default: ""
+      t.text :about_me
       t.string :contact_info
       t.string :company
       t.string :position

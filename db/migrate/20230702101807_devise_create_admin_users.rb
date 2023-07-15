@@ -4,7 +4,7 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :admin_users do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
+      t.string :email, null: false, default: "", format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\z/ }
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable

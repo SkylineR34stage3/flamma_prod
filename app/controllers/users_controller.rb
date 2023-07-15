@@ -73,6 +73,7 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.image.attach(params[:user][:profile_pic])
 
     respond_to do |format|
       if @user.save
@@ -89,6 +90,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        @user.image.attach(params[:user][:profile_pic])
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -116,6 +118,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:nickname, :email, :name, :surname, :avatar, :location, :about_me, :contact_info, :company, :position, :slug, :role, :activity_status, :is_rejected, :reject_date, :reject_reason, :is_banned, :ban_date, :ban_reason, :telegram_id, :respect)
+      params.require(:user).permit(:nickname, :email, :name, :surname, :avatar, :location, :about_me, :contact_info, :company, :position, :slug, :role, :activity_status, :is_rejected, :reject_date, :reject_reason, :is_banned, :ban_date, :ban_reason, :telegram_id, :respect, :profile_pic)
     end
 end

@@ -6,6 +6,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.role = :user
     resource.status = :pending_verification
 
+    resource.profile_pic.attach(params[:user][:profile_pic])
+
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -28,10 +30,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :name, :surname)
+    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :name, :surname, :profile_pic)
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :nickname, :name, :surname)
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :nickname, :name, :surname, :profile_pic)
   end
 end

@@ -4,11 +4,14 @@ class User < ApplicationRecord
   before_validation :set_slug, on: :create
 
   has_many :posts
+  has_one_attached :profile_pic
 
-  validates :nickname, :email, :name, :surname, presence: true
-  validates :email, uniqueness: true
+  validates :nickname, :email, presence: true
+  validates :name, :surname, presence: true, length: {minimum: 2}
+  validates :email, uniqueness: true, format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\z/ }
   validates :slug, uniqueness: true
   validates :role, :status, presence: true
+
 
   enum role: { user: 0, admin: 1 }
   enum status: { pending_verification: 0, verified: 1, banned: 2, rejected: 3 }

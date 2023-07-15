@@ -29,9 +29,11 @@
         </ul>
 
         <% if user_signed_in? %>
-            <span class="navbar-text">
-              Logged in as <%= current_user.email %> (Role: <%= current_user.role %>)
-            </span>
+  <span class="navbar-text">
+    Logged in as <%= link_to current_user.email, edit_user_registration_path %>
+    (Role: <%= current_user.role %>)
+  </span>
+          <%= image_tag(current_user.profile_pic, size: "50x50") if current_user.profile_pic.attached? %>
 
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
