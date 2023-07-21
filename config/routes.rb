@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get :decline
     end
   end
-  get 'verification', to: 'users#verification', as: 'verification'
+  get 'verify', to: 'users#verify', as: 'verify'
   get 'banned', to: 'users#banned', as: 'banned'
   get 'rejected', to: 'users#rejected', as: 'rejected'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

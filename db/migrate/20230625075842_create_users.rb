@@ -5,9 +5,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :email, null: false, default: "", format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\z/ }
       t.string :name, null: false, default: "", limit: 20
       t.string :surname, null: false, default: "", limit: 20
-      t.string :location
+      t.integer :location
       t.text :about_me
-      t.string :contact_info
+      t.integer :contact_info
       t.string :company
       t.string :position
       t.string :slug
@@ -21,6 +21,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.datetime :ban_date
       t.string :ban_reason
       t.integer :respect, default: 0
+      t.integer :comments, default: 0
+      t.integer :achievments, default: 0
 
       t.timestamps
     end
@@ -30,5 +32,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     add_index :users, :slug, unique: true
     add_index :users, :role
     add_index :users, :status
+
+    add_foreign_key :users, :locations, column: :location
+    add_foreign_key :users, :contact_infos, column: :contact_info
+
   end
 end

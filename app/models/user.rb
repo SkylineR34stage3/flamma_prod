@@ -4,6 +4,10 @@ class User < ApplicationRecord
   before_validation :set_slug, on: :create
 
   has_many :posts
+  has_one :location
+  accepts_nested_attributes_for :location
+  has_one :contact_info
+  attr_accessor :telegram_id, :phone
   has_one_attached :profile_pic
 
   validates :nickname, :email, presence: true

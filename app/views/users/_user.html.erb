@@ -1,107 +1,39 @@
 <div id="<%= dom_id user %>">
-  <p>
-    <strong>Nickname:</strong>
-    <%= user.nickname %>
-  </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
+  <%= image_tag(user.profile_pic, size: "150x150") if user.profile_pic.attached? %>
 
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
+  <% user_attributes = {
+    "Nickname": user.nickname,
+    "Email": user.email,
+    "Name": user.name,
+    "Surname": user.surname,
+    "About me": user.about_me,
+    "Company": user.company,
+    "Position": user.position,
+    "Role": user.role,
+    "Respect": user.respect
+  }
+     user_attributes.each do |label, value|
+       if value.present?
+    %>
+      <p>
+        <strong><%= label %>:</strong>
+        <%= value %>
+      </p>
+    <%
+      end
+      end
+    %>
 
-  <p>
-    <strong>Surname:</strong>
-    <%= user.surname %>
-  </p>
-
-  <p>
-    <strong>Avatar:</strong>
-    <%= user.avatar %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= user.location %>
-  </p>
-
-  <p>
-    <strong>About me:</strong>
-    <%= user.about_me %>
-  </p>
-
-  <p>
-    <strong>Contact info:</strong>
-    <%= user.contact_info %>
-  </p>
-
-  <p>
-    <strong>Company:</strong>
-    <%= user.company %>
-  </p>
-
-  <p>
-    <strong>Position:</strong>
-    <%= user.position %>
-  </p>
-
-  <p>
-    <strong>Slug:</strong>
-    <%= user.slug %>
-  </p>
-
-  <p>
-    <strong>Role:</strong>
-    <%= user.role %>
-  </p>
-
-  <p>
-    <strong>Activity status:</strong>
-    <%= user.activity_status %>
-  </p>
-
-  <p>
-    <strong>Is rejected:</strong>
-    <%= user.is_rejected %>
-  </p>
-
-  <p>
-    <strong>Reject date:</strong>
-    <%= user.reject_date %>
-  </p>
-
-  <p>
-    <strong>Reject reason:</strong>
-    <%= user.reject_reason %>
-  </p>
-
-  <p>
-    <strong>Is banned:</strong>
-    <%= user.is_banned %>
-  </p>
-
-  <p>
-    <strong>Ban date:</strong>
-    <%= user.ban_date %>
-  </p>
-
-  <p>
-    <strong>Ban reason:</strong>
-    <%= user.ban_reason %>
-  </p>
-
-  <p>
-    <strong>Telegram:</strong>
-    <%= user.telegram_id %>
-  </p>
-
-  <p>
-    <strong>Respect:</strong>
-    <%= user.respect %>
-  </p>
+  <% if user.contact_info.present? %>
+    <p>
+      <strong>Telegram ID:</strong>
+      <%= user.contact_info.telegram_id %>
+    </p>
+    <p>
+      <strong>Phone:</strong>
+      <%= user.contact_info.phone %>
+    </p>
+  <% end %>
 
 </div>

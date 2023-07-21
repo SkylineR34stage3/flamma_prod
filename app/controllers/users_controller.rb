@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def check_verification
     if current_user.status == "pending_verification"
-      redirect_to verification_path
+      redirect_to verify_path
     elsif current_user.status == "banned"
       redirect_to banned_path
     elsif current_user.status == "rejected"
@@ -56,18 +56,6 @@ class UsersController < ApplicationController
     unless current_user.admin?
       redirect_to root_path, alert: "You are not authorized to perform this action"
     end
-  end
-
-  def verification
-    # render the page that informs the user they need to wait for verification
-  end
-
-  def banned
-    # render the page that informs the user they are banned
-  end
-
-  def rejected
-    # render the page that informs the user they are rejected
   end
 
   # POST /users or /users.json

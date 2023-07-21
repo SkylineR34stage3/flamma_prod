@@ -18,21 +18,22 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">My App</a>
+      <a class="navbar-brand" href="/">My App</a>
 
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="/">Home</a>
           </li>
           <!-- Add more links here -->
         </ul>
 
         <% if user_signed_in? %>
-  <span class="navbar-text">
-    Logged in as <%= link_to current_user.email, edit_user_registration_path %>
-    (Role: <%= current_user.role %>)
-  </span>
+          <span class="navbar-text">
+            Logged in as <%= link_to current_user.email, current_user %>
+            <%= link_to "Edit profile", edit_user_registration_path %>
+            (Role: <%= current_user.role %>)
+          </span>
           <%= image_tag(current_user.profile_pic, size: "50x50") if current_user.profile_pic.attached? %>
 
           <ul class="navbar-nav ml-auto">
@@ -52,7 +53,7 @@
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>>
+    <%= yield %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
